@@ -17,11 +17,11 @@ class PostSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     category = CategorySerializer(read_only=True)
     category_id = serializers.PrimaryKeyRelatedField(
-        queryset=Category.objects.all(), source='category', write_only=True
+        queryset=Category.objects.all(), source='category', required=False, write_only=True
     )
     tags = TagSerializer(many=True, read_only=True)
     tag_ids = serializers.PrimaryKeyRelatedField(
-        queryset=Tag.objects.all(), many=True, source='tags', write_only=True
+        queryset=Tag.objects.all(), many=True, source='tags', required=False, write_only=True
     )
 
     class Meta:
