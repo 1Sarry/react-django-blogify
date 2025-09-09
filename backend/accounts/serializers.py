@@ -7,22 +7,16 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password',"is_staff", "is_superuser"]
-        extra_kwargs = {"password": {"write_only": True}}
+        fields = ['id', 'username', 'email', 'password']
 
-    def create(self, validated_date):
+        def create(self, validated_date):
             user = User.objects.create_user(
                 username=validated_date['username'],
                 email= validated_date['email'],
                 password=validated_date['password']
 
             )
-            if validated_data.get("is_staff"):
-              user.is_staff = True
-            if validated_data.get("is_superuser"):
-              user.is_superuser = True
-            user.save()
-            return user    
+            return user
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
