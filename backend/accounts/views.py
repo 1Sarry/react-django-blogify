@@ -43,8 +43,9 @@ class LoginView(APIView):
 
 
 class LogoutView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny] 
+    # authentication_classes = [JWTAuthentication]
+    
     def post(self, request):
         try:
             refresh_token = request.data["refresh"]
